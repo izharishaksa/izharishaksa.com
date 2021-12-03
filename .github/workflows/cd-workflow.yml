@@ -15,13 +15,13 @@ jobs:
         go-version: 1.17.3
     - run: |
         go mod download
-        go build -o ./artifact ./cmd
+        go build -o artifact ./cmd
     - uses: actions/upload-artifact@main
       with:
         name: izharishaksa-com
         path: |
           artifact
-          ./internal
+          internal/
 
   Build-and-Push-Docker-Image:
     runs-on: ubuntu-latest
