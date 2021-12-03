@@ -33,4 +33,4 @@ jobs:
         go-version: 1.17.3
     - run: |
         go mod download
-        go test -v
+        go test ./... -v
