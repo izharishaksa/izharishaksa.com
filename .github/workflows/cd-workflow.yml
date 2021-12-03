@@ -3,8 +3,6 @@ name: Docker CD
 on:
   push:
   pull_request:
-    paths:
-    - "**Dockerfile**"
 
 jobs:
   build:
@@ -21,7 +19,9 @@ jobs:
     - uses: actions/upload-artifact@main
       with:
         name: izharishaksa-com
-        path: artifact
+        path: |
+          artifact
+          ./internal
 
   Build-and-Push-Docker-Image:
     runs-on: ubuntu-latest
@@ -35,7 +35,6 @@ jobs:
       uses: actions/download-artifact@main
       with:
         name: izharishaksa-com
-        path: artifact
     - name: Build container image
       uses: docker/build-push-action@v1
       with:
