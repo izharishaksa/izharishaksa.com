@@ -1,3 +1,5 @@
+package xxx
+
 import "testing"
 
 func TestReverseToReturnReversedInputString(t *testing.T) {
