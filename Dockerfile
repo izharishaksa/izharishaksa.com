@@ -6,4 +6,4 @@ COPY . /usr/bin
 
 EXPOSE 900
 
-CMD ["izharishaksa-com"]
+CMD ["./izharishaksa-com"]
