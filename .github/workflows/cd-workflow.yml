@@ -6,25 +6,8 @@ on:
 
 jobs:
 
-  run-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
-
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   build:
-    needs: run-lint
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
       - name: Setup go
@@ -40,16 +23,3 @@ jobs:
           path: |
             izharishaksa-com
             internal/
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.17.3
-      - run: |
-          go mod download
-          go test ./... -v
