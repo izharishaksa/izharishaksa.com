@@ -33,12 +33,12 @@ jobs:
         go-version: 1.17.3
     - run: |
         go mod download
-        go build -o artifact ./cmd
+        GOOS=darwin GOARCH=amd64 go build -o izharishaksa-com ./cmd
     - uses: actions/upload-artifact@main
       with:
-        name: izharishaksa-com
+        name: artifact
         path: |
-          artifact
+          izharishaksa-com
           internal/
 
   test:
