@@ -53,7 +53,7 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
-          run: |
+          script: |
             docker container stop izharishaksa.com
             docker container rm izharishaksa.com
             docker image rm ghcr.io/izharishaksa/izharishaksa.com:main
