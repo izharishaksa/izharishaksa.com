@@ -54,3 +54,22 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-push-image
+    steps:
+      - name: Executing remote  command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          run: |
+            docker container stop izharishaksa.com
+            docker container rm izharishaksa.com
+            docker image rm ghcr.io/izharishaksa/izharishaksa.com:main
+            docker pull ghcr.io/izharishaksa/izharishaksa.com:main
+            docker run -t -d -p 900:900 --name izharishaksa.com ghcr.io/izharishaksa/izharishaksa.com:main
