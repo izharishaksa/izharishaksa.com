@@ -57,5 +57,6 @@ jobs:
             docker container stop izharishaksa.com
             docker container rm izharishaksa.com
             docker image rm ghcr.io/izharishaksa/izharishaksa.com:main
+            docker login ghcr.io -u izharishaksa -p ${{ secrets.GITHUB_TOKEN }}
             docker pull ghcr.io/izharishaksa/izharishaksa.com:main
             docker run -t -d -p 900:900 --name izharishaksa.com ghcr.io/izharishaksa/izharishaksa.com:main
